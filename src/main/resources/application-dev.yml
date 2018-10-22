@@ -1,0 +1,23 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    name: mybatis-test
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/test
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.zab.mybatis.beans
+  configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
