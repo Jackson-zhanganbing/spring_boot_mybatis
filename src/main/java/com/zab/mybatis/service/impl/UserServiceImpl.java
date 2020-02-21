@@ -23,28 +23,28 @@ public class UserServiceImpl implements UserService {
         int i = 1 / 0;
        /* int[] ints = {1,2,3,4};
         System.out.println(ints[5]);*/
-        return new Msg("0", "查询成功", "查询成功", users);
+        return new Msg("0", "查询成功", users);
     }
 
     @Override
     public Msg selectByPrimaryKey(Integer id) {
         User user = userMapper.selectByPrimaryKey(id);
-        return new Msg("0", "查询成功", "查询成功", user);
+        return new Msg("0", "查询成功", user);
     }
 
     @Override
     public Msg insert(User user) {
         int result = userMapper.insert(user);
         if (result == 1) {
-            return new Msg("0", "新增成功", "新增成功", result);
+            return new Msg("0", "新增成功", result);
         }
-        return new Msg("1", "新增失败", "新增失败", result);
+        return new Msg("1", "新增失败", result);
     }
 
     @Override
     public Msg findByPaging(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         Page<User> userList = userMapper.findByPaging();
-        return new Msg("0", "查询成功", "查询成功", userList);
+        return new Msg("0", "查询成功", userList);
     }
 }
