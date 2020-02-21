@@ -1,15 +1,15 @@
 package com.zab.mybatis.service;
 
 import com.zab.mybatis.beans.User;
-import com.zab.mybatis.common.GeneralResponse;
+import com.zab.mybatis.common.Msg;
 
 public interface UserService {
 
-    GeneralResponse findAll();
+    Msg findAll();
 
-    GeneralResponse selectByPrimaryKey(Integer id);
+    Msg selectByPrimaryKey(Integer id);
 
-    GeneralResponse insert(User user);
+    Msg insert(User user);
 
-    GeneralResponse findByPaging(Integer pageNum, Integer pageSize);
+    Msg findByPaging(Integer pageNum, Integer pageSize);
 }

@@ -19,33 +19,33 @@ public class ExceptionAspectController {
     @Around("pointCut()")
     public Object handleControllerMethod(ProceedingJoinPoint pjp) {
 
-        GeneralResponse<?> GeneralResponse;
+        Msg<?> Msg;
         try {
             log.info("执行Controller开始: {}，参数：{}",pjp.getSignature(),pjp.getArgs());
-            GeneralResponse = (GeneralResponse<?>) pjp.proceed(pjp.getArgs());
-            log.info("执行Controller结束: {}，返回值：{} ", pjp.getSignature(),GeneralResponse.toString());
+            Msg = (Msg<?>) pjp.proceed(pjp.getArgs());
+            log.info("执行Controller结束: {}，返回值：{} ", pjp.getSignature(), Msg.toString());
         } catch (Throwable throwable) {
-            GeneralResponse = handleException(pjp, throwable);
+            Msg = handleException(pjp, throwable);
         }
 
-        return GeneralResponse;
+        return Msg;
     }
 
-    private GeneralResponse handleException(ProceedingJoinPoint pjp, Throwable e) {
-        GeneralResponse generalResponse = null;
+    private Msg handleException(ProceedingJoinPoint pjp, Throwable e) {
+        Msg msg = null;
         if(e.getClass().isAssignableFrom(MessageCenterException.class) ){
             MessageCenterException messageCenterException = (MessageCenterException)e;
             log.error("MessageCenterException{方法：" + pjp.getSignature().toShortString() + "， 参数：" + pjp.getArgs() + ",异常：" + messageCenterException.getException().getMessage() + "}", e);
-            generalResponse = messageCenterException.getGeneralResponse();
+            msg = messageCenterException.getMsg();
         } else if (e instanceof RuntimeException) {
             log.error("RuntimeException{方法：" + pjp.getSignature().toShortString() + "， 参数：" + pjp.getArgs() + ",异常：" + e.getMessage() + "}", e);
-            generalResponse = new GeneralResponse("1","错误","错误",null);
+            msg = new Msg("1","错误","错误",null);
         } else {
             log.error("异常{方法：" + pjp.getSignature().toShortString() + "， 参数：" + pjp.getArgs() + ",异常：" + e.getMessage() + "}", e);
-            generalResponse = new GeneralResponse("1","错误","错误",null);
+            msg = new Msg("1","错误","错误",null);
         }
 
-        return generalResponse;
+        return msg;
     }
 }
 

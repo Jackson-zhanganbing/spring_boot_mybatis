@@ -2,13 +2,13 @@ package com.zab.mybatis.common;
 
 public class MessageCenterException extends RuntimeException {
 
-    public MessageCenterException(GeneralResponse generalResponse, Exception exception){
-        this.generalResponse = generalResponse;
+    public MessageCenterException(Msg msg, Exception exception){
+        this.msg = msg;
         this.exception = exception;
     }
 
     private Exception exception;
-    private GeneralResponse generalResponse;
+    private Msg msg;
 
     public Exception getException() {
         return exception;
@@ -18,11 +18,11 @@ public class MessageCenterException extends RuntimeException {
         this.exception = exception;
     }
 
-    public GeneralResponse getGeneralResponse() {
-        return generalResponse;
+    public Msg getMsg() {
+        return msg;
     }
 
-    public void setGeneralResponse(GeneralResponse generalResponse) {
-        this.generalResponse = generalResponse;
+    public void setMsg(Msg msg) {
+        this.msg = msg;
     }
 }
